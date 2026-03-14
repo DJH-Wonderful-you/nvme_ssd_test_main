@@ -1,0 +1,79 @@
+{
+  "write_verify": {
+    "offsets_mb": [16, 128, 512],
+    "region_length_mb": 8,
+    "chunk_size_kb": 1024,
+    "seed_base": 20260314
+  },
+  "flush_test": {
+    "offset_mb": 1024,
+    "length_mb": 4,
+    "chunk_size_kb": 1024,
+    "seed": 41001
+  },
+  "trim_test": {
+    "offset_mb": 1536,
+    "length_mb": 16,
+    "chunk_size_kb": 1024,
+    "write_seed": 52001,
+    "rewrite_seed": 52002
+  },
+  "fio_jobs": [
+    {
+      "name": "seq_write_128k",
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 32,
+      "numjobs": 1,
+      "size_mb": 512,
+      "offset_mb": 2048
+    },
+    {
+      "name": "seq_read_128k",
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 32,
+      "numjobs": 1,
+      "size_mb": 512,
+      "offset_mb": 3072
+    },
+    {
+      "name": "rand_write_4k",
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 32,
+      "numjobs": 1,
+      "size_mb": 256,
+      "offset_mb": 4096
+    },
+    {
+      "name": "rand_read_4k",
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 32,
+      "numjobs": 1,
+      "size_mb": 256,
+      "offset_mb": 4608
+    },
+    {
+      "name": "randrw_4k_70read",
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 32,
+      "numjobs": 1,
+      "size_mb": 256,
+      "offset_mb": 5120,
+      "rwmixread": 70
+    }
+  ],
+  "c_tool": {
+    "binary": "./c_tools/nvme_admin_tool"
+  },
+  "c_odirect_test": {
+    "binary": "./c_tools/nvme_odirect_verify",
+    "offset_mb": 5632,
+    "length_mb": 8,
+    "block_size_kb": 4,
+    "seed": 63001
+  }
+}
