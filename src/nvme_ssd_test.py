@@ -260,7 +260,7 @@ class NvmeSsdTestProject:
         fallback_offset = (fallback_offset // MiB) * MiB
         return fallback_offset, length_bytes, True
 
-    def collect_snapshot(self, tag: str) -> dict[str, Any]:
+    def collect_snapshot(self, tag: str) -> dict[str, Any]:     # 重要
         """采集测试前后的关键设备信息。"""
         self.log(f"采集 {tag} 设备信息")
         snapshot: dict[str, Any] = {}
@@ -286,7 +286,7 @@ class NvmeSsdTestProject:
         )
         return snapshot
 
-    def extract_smart_summary(self, snapshot: dict[str, Any]) -> dict[str, Any]:
+    def extract_smart_summary(self, snapshot: dict[str, Any]) -> dict[str, Any]:    # 重要
         """
         smartctl 的 JSON 结构比较复杂，只提取最适合写报告的几个关键项。
         """
@@ -304,7 +304,7 @@ class NvmeSsdTestProject:
             "num_err_log_entries": nvme_info.get("num_err_log_entries"),
         }
 
-    def compare_smart(self, before: dict[str, Any], after: dict[str, Any]) -> TestResult:
+    def compare_smart(self, before: dict[str, Any], after: dict[str, Any]) -> TestResult:   # 重要
         before_summary = self.extract_smart_summary(before)
         after_summary = self.extract_smart_summary(after)
         warnings: list[str] = []
@@ -345,7 +345,7 @@ class NvmeSsdTestProject:
         length_bytes: int,
         chunk_bytes: int,
         seed: int,
-    ) -> dict[str, Any]:
+    ) -> dict[str, Any]:                                                    # 非常重要
         """
         使用固定随机种子生成可复现的数据模式。
 
@@ -397,7 +397,7 @@ class NvmeSsdTestProject:
             "actual_sha256": sha_read.hexdigest(),
         }
 
-    def run_basic_write_verify(self, device_size_bytes: int) -> TestResult:
+    def run_basic_write_verify(self, device_size_bytes: int) -> TestResult:     # 重要
         self.log("执行 Python 基础写入/回读校验测试")
         cfg = self.config["write_verify"]
         offset_list = cfg["offsets_mb"]
@@ -451,7 +451,7 @@ class NvmeSsdTestProject:
             warnings=warnings,
         )
 
-    def run_flush_test(self, device_size_bytes: int) -> TestResult:
+    def run_flush_test(self, device_size_bytes: int) -> TestResult:     # 重要
         self.log("执行 Flush 测试")
         cfg = self.config["flush_test"]
         offset_bytes, length_bytes, used_fallback = self.resolve_region(
@@ -515,7 +515,7 @@ class NvmeSsdTestProject:
             artifacts=["flush_command.json"],
         )
 
-    def run_trim_test(self, device_size_bytes: int) -> TestResult:
+    def run_trim_test(self, device_size_bytes: int) -> TestResult:      # 重要
         self.log("执行 TRIM/Discard 测试")
         cfg = self.config["trim_test"]
         offset_bytes, length_bytes, used_fallback = self.resolve_region(
@@ -605,7 +605,7 @@ class NvmeSsdTestProject:
             artifacts=["trim_blkdiscard.json"],
         )
 
-    def parse_fio_metrics(self, payload: dict[str, Any], job_name: str) -> dict[str, Any]:
+    def parse_fio_metrics(self, payload: dict[str, Any], job_name: str) -> dict[str, Any]:  
         jobs = payload.get("jobs") or []
         if not jobs:
             raise ProjectError(f"fio 结果中缺少 jobs 字段: {job_name}")
@@ -638,7 +638,7 @@ class NvmeSsdTestProject:
             "metrics": extract(target),
         }
 
-    def build_fio_command(self, job_cfg: dict[str, Any], *, offset_bytes: int, length_bytes: int) -> list[str]:
+    def build_fio_command(self, job_cfg: dict[str, Any], *, offset_bytes: int, length_bytes: int) -> list[str]: # 重要
         cmd = [
             "fio",
             f"--name={job_cfg['name']}",
@@ -669,7 +669,7 @@ class NvmeSsdTestProject:
             cmd.append("--time_based=1")
         return cmd
 
-    def run_fio_smoke(self, device_size_bytes: int) -> TestResult:
+    def run_fio_smoke(self, device_size_bytes: int) -> TestResult:  # 重要
         self.log("执行 fio 性能冒烟测试")
         jobs_cfg = self.config["fio_jobs"]
         job_results: list[dict[str, Any]] = []
@@ -724,7 +724,7 @@ class NvmeSsdTestProject:
             artifacts=[f"fio_{job['name']}.json" for job in jobs_cfg],
         )
 
-    def run_c_admin_tool(self) -> TestResult:
+    def run_c_admin_tool(self) -> TestResult:       # 重要
         self.log("执行 C 语言 NVMe Admin 命令测试")
         binary = self.resolve_project_path(self.config["c_tool"]["binary"])
         if not binary.exists():
@@ -767,7 +767,7 @@ class NvmeSsdTestProject:
             artifacts=[f"c_tool_{index + 1}.json" for index in range(len(commands))],
         )
 
-    def run_c_odirect_verify(self, device_size_bytes: int) -> TestResult:
+    def run_c_odirect_verify(self, device_size_bytes: int) -> TestResult:   # 重要
         self.log("执行 C 语言 O_DIRECT 校验测试")
         cfg = self.config["c_odirect_test"]
         binary = self.resolve_project_path(cfg["binary"])
