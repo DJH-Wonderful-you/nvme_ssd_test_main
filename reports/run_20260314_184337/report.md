@@ -1,0 +1,326 @@
+# NVMe SSD 自动化测试报告
+
+- 测试时间: 2026-03-14 18:43:45
+- 目标设备: `/dev/nvme1n1`
+- 控制器节点: `/dev/nvme1`
+- Namespace ID: `1`
+- 设备容量: `953.87 GiB`
+- 总体结论: `PASS`
+
+## 测试前 SMART 摘要
+
+```json
+{
+  "critical_warning": 0,
+  "temperature_celsius": 39,
+  "available_spare": 100,
+  "available_spare_threshold": 10,
+  "percentage_used": 0,
+  "data_units_read": 282263,
+  "data_units_written": 517944,
+  "media_errors": 0,
+  "num_err_log_entries": 0
+}
+```
+
+## 测试结果
+
+### Python 基础写入/回读校验
+
+- 状态: `PASS`
+- 结论: 多个测试区完成 pattern 写入与回读校验，未发现数据不一致。
+- 详细信息:
+```json
+{
+  "regions": [
+    {
+      "requested_offset_mb": 16,
+      "actual_offset_mb": 16,
+      "length_mb": 8,
+      "seed": 20260314,
+      "verify_result": {
+        "match": true,
+        "expected_sha256": "c294f7c4ccf9bf6860aa24294480e743ef64462b16f984d786e56336e5d57cac",
+        "actual_sha256": "c294f7c4ccf9bf6860aa24294480e743ef64462b16f984d786e56336e5d57cac"
+      }
+    },
+    {
+      "requested_offset_mb": 128,
+      "actual_offset_mb": 128,
+      "length_mb": 8,
+      "seed": 20260315,
+      "verify_result": {
+        "match": true,
+        "expected_sha256": "d5ac0caf604f1c2ff34e7962c6c595e493a7c412173f7dea72cbe48937aa92b9",
+        "actual_sha256": "d5ac0caf604f1c2ff34e7962c6c595e493a7c412173f7dea72cbe48937aa92b9"
+      }
+    },
+    {
+      "requested_offset_mb": 512,
+      "actual_offset_mb": 512,
+      "length_mb": 8,
+      "seed": 20260316,
+      "verify_result": {
+        "match": true,
+        "expected_sha256": "878bb252981fb509095299a3cc80f49fc12c9b1597dd9d7bad7b5099eec11199",
+        "actual_sha256": "878bb252981fb509095299a3cc80f49fc12c9b1597dd9d7bad7b5099eec11199"
+      }
+    }
+  ]
+}
+```
+
+### Flush 测试
+
+- 状态: `PASS`
+- 结论: 写入校验通过且 NVMe Flush 命令返回成功。
+- 详细信息:
+```json
+{
+  "offset_mb": 1024,
+  "length_mb": 4,
+  "sample_hex_after_flush": "9724d612f68c2a3886da1c619c66907a5825f5b27a1f0711468780aa046423daec8b6d499ee7a588f364adc88ccf63cbc15607cf82ec9b3d6b34c9ef3539b3ea"
+}
+```
+- 产物文件:
+  - `flush_command.json`
+
+### TRIM/Discard 测试
+
+- 状态: `PASS`
+- 结论: blkdiscard 成功，且 discard 后重写与回读校验通过。
+- 告警/说明:
+  - 注意：NVMe/SSD 在 discard 后读回全 0、全 1 或其他值都可能是合法行为，不能把“是否为全 0”作为唯一判定标准。
+- 详细信息:
+```json
+{
+  "offset_mb": 1536,
+  "length_mb": 16,
+  "post_discard_sample_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "rewrite_result": {
+    "match": true,
+    "expected_sha256": "893bb7ddd4056f83032fe7f272c3ba5ebc60a71e74be996c0d9ad5d9c95d19e4",
+    "actual_sha256": "893bb7ddd4056f83032fe7f272c3ba5ebc60a71e74be996c0d9ad5d9c95d19e4"
+  }
+}
+```
+- 产物文件:
+  - `trim_blkdiscard.json`
+
+### fio 性能冒烟测试
+
+- 状态: `PASS`
+- 结论: 顺序、随机以及混合读写基础性能测试执行完成。
+- 详细信息:
+```json
+{
+  "jobs": [
+    {
+      "name": "seq_write_128k",
+      "rw": "write",
+      "bs": "128k",
+      "rwmixread": null,
+      "offset_mb": 2048,
+      "size_mb": 512,
+      "metrics": {
+        "mode": "single_direction",
+        "active_direction": "write",
+        "metrics": {
+          "io_bytes": 536870912,
+          "iops": 10189.054726,
+          "bandwidth_bytes_per_sec": 1335499781,
+          "mean_latency_ns": 3115825.297607,
+          "p99_latency_ns": 4620288
+        }
+      }
+    },
+    {
+      "name": "seq_read_128k",
+      "rw": "read",
+      "bs": "128k",
+      "rwmixread": null,
+      "offset_mb": 3072,
+      "size_mb": 512,
+      "metrics": {
+        "mode": "single_direction",
+        "active_direction": "read",
+        "metrics": {
+          "io_bytes": 536870912,
+          "iops": 21445.026178,
+          "bandwidth_bytes_per_sec": 2810842471,
+          "mean_latency_ns": 1474202.93335,
+          "p99_latency_ns": 5603328
+        }
+      }
+    },
+    {
+      "name": "rand_write_4k",
+      "rw": "randwrite",
+      "bs": "4k",
+      "rwmixread": null,
+      "offset_mb": 4096,
+      "size_mb": 256,
+      "metrics": {
+        "mode": "single_direction",
+        "active_direction": "write",
+        "metrics": {
+          "io_bytes": 268435456,
+          "iops": 259035.573123,
+          "bandwidth_bytes_per_sec": 1061009707,
+          "mean_latency_ns": 120469.03624,
+          "p99_latency_ns": 448512
+        }
+      }
+    },
+    {
+      "name": "rand_read_4k",
+      "rw": "randread",
+      "bs": "4k",
+      "rwmixread": null,
+      "offset_mb": 4608,
+      "size_mb": 256,
+      "metrics": {
+        "mode": "single_direction",
+        "active_direction": "read",
+        "metrics": {
+          "io_bytes": 268435456,
+          "iops": 39527.141134,
+          "bandwidth_bytes_per_sec": 161903170,
+          "mean_latency_ns": 807081.042145,
+          "p99_latency_ns": 8454144
+        }
+      }
+    },
+    {
+      "name": "randrw_4k_70read",
+      "rw": "randrw",
+      "bs": "4k",
+      "rwmixread": 70,
+      "offset_mb": 5120,
+      "size_mb": 256,
+      "metrics": {
+        "mode": "mixed",
+        "read": {
+          "io_bytes": 188047360,
+          "iops": 38742.616034,
+          "bandwidth_bytes_per_sec": 158689755,
+          "mean_latency_ns": 815792.921695,
+          "p99_latency_ns": 8585216
+        },
+        "write": {
+          "io_bytes": 80388096,
+          "iops": 16562.025316,
+          "bandwidth_bytes_per_sec": 67838055,
+          "mean_latency_ns": 15414.238052,
+          "p99_latency_ns": 37632
+        }
+      }
+    }
+  ]
+}
+```
+- 产物文件:
+  - `fio_seq_write_128k.json`
+  - `fio_seq_read_128k.json`
+  - `fio_rand_write_4k.json`
+  - `fio_rand_read_4k.json`
+  - `fio_randrw_4k_70read.json`
+
+### C 语言 NVMe Admin 命令测试
+
+- 状态: `PASS`
+- 结论: 通过 ioctl 成功执行 Identify、SMART Log、Error Log 查询。
+- 详细信息:
+```json
+{
+  "outputs": {
+    "id-ctrl": "Identify Controller\n===================\nVID: 0x1d97\nSSVID: 0x1d97\nSerial Number: QHD292R001169P3300\nModel Number: Lexar SSD ARES PRO 1TB\nFirmware Revision: 641225\nController ID: 0\nVersion (raw): 0x00020000\nIEEE OUI Identifier: 5b-f2-ca",
+    "id-ns 1": "Identify Namespace\n==================\nNamespace ID: 1\nNSZE: 2000409264\nNCAP: 2000409264\nNUSE: 2000409264\nNSFEAT: 0x00\nNLBAF: 0\nFLBAS: 0x00\nSelected LBA Format Index: 0\nSelected LBA Data Size: 512 bytes\nSelected Metadata Size: 0 bytes",
+    "smart-log": "SMART / Health Log\n==================\nCritical Warning: 0x00\nTemperature: 39 C (312 K)\nAvailable Spare: 100 %\nAvailable Spare Threshold: 10 %\nPercentage Used: 0 %\nData Units Read (low64): 284228\nData Units Written (low64): 519797\nHost Read Commands (low64): 13322778\nHost Write Commands (low64): 42535056\nMedia Errors (low64): 0\nNumber of Error Log Entries (low64): 0",
+    "error-log 1": "Error Log\n=========\nEntry 0\n  Error Count: 0\n  SQID: 0\n  CMDID: 0\n  Status Field: 0x0000\n  LBA: 0\n  Namespace ID: 0"
+  }
+}
+```
+- 产物文件:
+  - `c_tool_1.json`
+  - `c_tool_2.json`
+  - `c_tool_3.json`
+  - `c_tool_4.json`
+
+### C 语言 O_DIRECT 校验测试
+
+- 状态: `PASS`
+- 结论: 使用 C 和 O_DIRECT 完成裸盘写入/回读校验。
+- 详细信息:
+```json
+{
+  "device": "/dev/nvme1n1",
+  "offset_mb": 5632,
+  "length_mb": 8,
+  "block_size_kb": 4,
+  "logical_block_size": 512,
+  "alignment_bytes": 4096,
+  "seed": 63001,
+  "expected_fnv1a": "0xa6a13314189b7ce1",
+  "actual_fnv1a": "0xa6a13314189b7ce1",
+  "mismatch_offset": null,
+  "match": true
+}
+```
+- 产物文件:
+  - `c_odirect_verify.json`
+
+### SMART 对比检查
+
+- 状态: `PASS`
+- 结论: 比对测试前后 SMART 关键字段，判断是否出现新的健康风险。
+- 详细信息:
+```json
+{
+  "before": {
+    "critical_warning": 0,
+    "temperature_celsius": 39,
+    "available_spare": 100,
+    "available_spare_threshold": 10,
+    "percentage_used": 0,
+    "data_units_read": 282263,
+    "data_units_written": 517944,
+    "media_errors": 0,
+    "num_err_log_entries": 0
+  },
+  "after": {
+    "critical_warning": 0,
+    "temperature_celsius": 39,
+    "available_spare": 100,
+    "available_spare_threshold": 10,
+    "percentage_used": 0,
+    "data_units_read": 284247,
+    "data_units_written": 519813,
+    "media_errors": 0,
+    "num_err_log_entries": 0
+  }
+}
+```
+- 产物文件:
+  - `before_smartctl.json`
+  - `after_smartctl.json`
+
+## 测试后 SMART 摘要
+
+```json
+{
+  "critical_warning": 0,
+  "temperature_celsius": 39,
+  "available_spare": 100,
+  "available_spare_threshold": 10,
+  "percentage_used": 0,
+  "data_units_read": 284247,
+  "data_units_written": 519813,
+  "media_errors": 0,
+  "num_err_log_entries": 0
+}
+```
+
+## 命令执行记录
+
+详情见 `command_log.json`。

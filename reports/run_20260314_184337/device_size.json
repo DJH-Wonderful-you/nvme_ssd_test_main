@@ -1,0 +1,7 @@
+{
+  "cmd": "blockdev --getsize64 /dev/nvme1n1",
+  "returncode": 0,
+  "duration_sec": 0.001,
+  "stdout": "1024209543168\n",
+  "stderr": ""
+}

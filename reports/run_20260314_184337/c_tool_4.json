@@ -1,0 +1,7 @@
+{
+  "cmd": "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool /dev/nvme1 error-log 1",
+  "returncode": 0,
+  "duration_sec": 0.002,
+  "stdout": "Error Log\n=========\nEntry 0\n  Error Count: 0\n  SQID: 0\n  CMDID: 0\n  Status Field: 0x0000\n  LBA: 0\n  Namespace ID: 0\n",
+  "stderr": ""
+}

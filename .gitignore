@@ -1,4 +1,4 @@
-reports/run_*/
+# reports/run_*/
 c_tools/nvme_admin_tool
 c_tools/nvme_odirect_verify
 src/__pycache__/

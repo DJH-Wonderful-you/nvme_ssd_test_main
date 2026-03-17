@@ -1,0 +1,7 @@
+{
+  "cmd": "nvme id-ns /dev/nvme1n1 -o json",
+  "returncode": 0,
+  "duration_sec": 0.002,
+  "stdout": "{\n  \"nsze\" : 2000409264,\n  \"ncap\" : 2000409264,\n  \"nuse\" : 2000409264,\n  \"nsfeat\" : 0,\n  \"nlbaf\" : 0,\n  \"flbas\" : 0,\n  \"mc\" : 0,\n  \"dpc\" : 0,\n  \"dps\" : 0,\n  \"nmic\" : 0,\n  \"rescap\" : 0,\n  \"fpi\" : 0,\n  \"nawun\" : 0,\n  \"nawupf\" : 0,\n  \"nacwu\" : 0,\n  \"nabsn\" : 0,\n  \"nabo\" : 0,\n  \"nabspf\" : 0,\n  \"noiob\" : 0,\n  \"nvmcap\" : 1024209543168,\n  \"nsattr\" : 0,\n  \"nvmsetid\" : 0,\n  \"mssrl\" : 0,\n  \"mcl\" : 0,\n  \"msrc\" : 0,\n  \"anagrpid\" : 0,\n  \"endgid\" : 0,\n  \"eui64\" : \"caf25b032b0000a9\",\n  \"nguid\" : \"0000000625081292caf25b038a000239\",\n  \"lbafs\" : [\n    {\n      \"ms\" : 0,\n      \"ds\" : 9,\n      \"rp\" : 0\n    }\n  ]\n}\n",
+  "stderr": ""
+}

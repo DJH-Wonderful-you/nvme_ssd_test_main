@@ -1,0 +1,7 @@
+{
+  "cmd": "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool /dev/nvme1 id-ns 1",
+  "returncode": 0,
+  "duration_sec": 0.001,
+  "stdout": "Identify Namespace\n==================\nNamespace ID: 1\nNSZE: 2000409264\nNCAP: 2000409264\nNUSE: 2000409264\nNSFEAT: 0x00\nNLBAF: 0\nFLBAS: 0x00\nSelected LBA Format Index: 0\nSelected LBA Data Size: 512 bytes\nSelected Metadata Size: 0 bytes\n",
+  "stderr": ""
+}

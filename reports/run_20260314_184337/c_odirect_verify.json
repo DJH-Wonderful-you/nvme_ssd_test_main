@@ -1,0 +1,7 @@
+{
+  "cmd": "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_odirect_verify /dev/nvme1n1 5632 8 4 63001",
+  "returncode": 0,
+  "duration_sec": 2.066,
+  "stdout": "{\n  \"device\": \"/dev/nvme1n1\",\n  \"offset_mb\": 5632,\n  \"length_mb\": 8,\n  \"block_size_kb\": 4,\n  \"logical_block_size\": 512,\n  \"alignment_bytes\": 4096,\n  \"seed\": 63001,\n  \"expected_fnv1a\": \"0xa6a13314189b7ce1\",\n  \"actual_fnv1a\": \"0xa6a13314189b7ce1\",\n  \"mismatch_offset\": null,\n  \"match\": true\n}\n",
+  "stderr": ""
+}

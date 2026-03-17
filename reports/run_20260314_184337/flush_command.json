@@ -1,0 +1,7 @@
+{
+  "cmd": "nvme flush /dev/nvme1n1 -n 1",
+  "returncode": 0,
+  "duration_sec": 0.002,
+  "stdout": "NVMe Flush: success\n",
+  "stderr": ""
+}

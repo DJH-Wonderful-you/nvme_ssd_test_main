@@ -1,0 +1,7 @@
+{
+  "cmd": "nvme smart-log /dev/nvme1n1 -o json",
+  "returncode": 0,
+  "duration_sec": 0.037,
+  "stdout": "{\n  \"critical_warning\" : 0,\n  \"temperature\" : 312,\n  \"avail_spare\" : 100,\n  \"spare_thresh\" : 10,\n  \"percent_used\" : 0,\n  \"endurance_grp_critical_warning_summary\" : 0,\n  \"data_units_read\" : 282263,\n  \"data_units_written\" : 517944,\n  \"host_read_commands\" : 13206613,\n  \"host_write_commands\" : 42445318,\n  \"controller_busy_time\" : 30,\n  \"power_cycles\" : 26,\n  \"power_on_hours\" : 28,\n  \"unsafe_shutdowns\" : 12,\n  \"media_errors\" : 0,\n  \"num_err_log_entries\" : 0,\n  \"warning_temp_time\" : 0,\n  \"critical_comp_time\" : 0,\n  \"temperature_sensor_1\" : 311,\n  \"temperature_sensor_2\" : 312,\n  \"thm_temp1_trans_count\" : 0,\n  \"thm_temp2_trans_count\" : 0,\n  \"thm_temp1_total_time\" : 0,\n  \"thm_temp2_total_time\" : 0\n}\n",
+  "stderr": ""
+}

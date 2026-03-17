@@ -1,0 +1,7 @@
+{
+  "cmd": "blkdiscard -o 1610612736 -l 16777216 /dev/nvme1n1",
+  "returncode": 0,
+  "duration_sec": 0.009,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,7 @@
+{
+  "cmd": "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool /dev/nvme1 id-ctrl",
+  "returncode": 0,
+  "duration_sec": 0.001,
+  "stdout": "Identify Controller\n===================\nVID: 0x1d97\nSSVID: 0x1d97\nSerial Number: QHD292R001169P3300\nModel Number: Lexar SSD ARES PRO 1TB\nFirmware Revision: 641225\nController ID: 0\nVersion (raw): 0x00020000\nIEEE OUI Identifier: 5b-f2-ca\n",
+  "stderr": ""
+}

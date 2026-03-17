@@ -1,0 +1,337 @@
+[
+  {
+    "cmd": [
+      "blockdev",
+      "--getsize64",
+      "/dev/nvme1n1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.001,
+    "stdout_preview": "1024209543168\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "lsblk",
+      "-J",
+      "-O",
+      "/dev/nvme1n1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.002,
+    "stdout_preview": "{\n   \"blockdevices\": [\n      {\n         \"name\": \"nvme1n1\",\n         \"kname\": \"nvme1n1\",\n         \"path\": \"/dev/nvme1n1\",\n         \"maj:min\": \"259:10\",\n         \"fsavail\": null,\n         \"fssize\": null,\n         \"fstype\": null,\n         \"fsused\": null,\n         \"fsuse%\": null,\n         \"fsroots\": [\n             null\n         ],\n         \"fsver\": null,\n         \"mountpoint\": null,\n         \"mountpoints\": [\n             null\n         ],\n         \"label\": null,\n         \"uuid\": null,\n         \"ptuuid\": null,\n         \"pttype\": null,\n         \"parttype\": null,\n         \"parttypename\": null,\n         \"partlabel\": null,\n         \"partuuid\": null,\n         \"partflags\": null,\n         \"ra\": 128,\n         \"ro\": false,\n         \"rm\": false,\n         \"hotplug\": false,\n         \"model\": \"Lexar SSD ARES PRO 1TB\",\n         \"serial\": \"QHD292R001169P3300\",\n         \"size\": \"953.9G\",\n         \"state\": \"live\",\n         \"owner\": \"root\",\n         \"group\": \"disk\",\n         \"mode\": \"brw-rw----\",\n         \"alignment\": 0,\n         \"min-io\": 512,\n         \"opt-io\": 0,\n         \"phy-sec\": 512,\n         \"log-sec\": 512,\n         \"rota\": false,\n         \"sched\": \"none\",\n         \"rq-size\": 1023,\n         \"type\": \"disk\",\n         \"disc-aln\": 0,\n         \"disc-gran\": \"512B\",\n         \"disc-max\": \"2T\",\n         \"disc-zero\": false,\n         \"wsame\": \"0B\",\n         \"wwn\": \"eui.0000000625081292caf25b038a000239\",\n         \"rand\": false,\n         \"pkname\": null,\n         \"hctl\": null,\n         \"tran\": \"nvme\",\n         \"subsystems\": \"block:nvme:pci\",\n         \"rev\": null,\n         \"vendor\": null,\n         \"zoned\": \"none\",\n         \"dax\": false\n      }\n   ]\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "id-ctrl",
+      "/dev/nvme1",
+      "-o",
+      "json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.011,
+    "stdout_preview": "{\n  \"vid\" : 7575,\n  \"ssvid\" : 7575,\n  \"sn\" : \"QHD292R001169P3300\",\n  \"mn\" : \"Lexar SSD ARES PRO 1TB\",\n  \"fr\" : \"641225  \",\n  \"rab\" : 0,\n  \"ieee\" : 13300315,\n  \"cmic\" : 0,\n  \"mdts\" : 7,\n  \"cntlid\" : 0,\n  \"ver\" : 131072,\n  \"rtd3r\" : 100000,\n  \"rtd3e\" : 2000000,\n  \"oaes\" : 512,\n  \"ctratt\" : 2,\n  \"rrls\" : 0,\n  \"fguid\" : \"00000000-0000-0000-0000-000000000000\",\n  \"crdt1\" : 0,\n  \"crdt2\" : 0,\n  \"crdt3\" : 0,\n  \"nvmsr\" : 0,\n  \"vwci\" : 0,\n  \"mec\" : 0,\n  \"oacs\" : 23,\n  \"acl\" : 2,\n  \"aerl\" : 3,\n  \"frmw\" : 22,\n  \"lpa\" : 22,\n  \"elpe\" : 63,\n  \"npss\" : 4,\n  \"avscc\" : 1,\n  \"apsta\" : 1,\n  \"wctemp\" : 363,\n  \"cctemp\" : 368,\n  \"mtfa\" : 200,\n  \"hmpre\" : 8192,\n  \"hmmin\" : 8192,\n  \"tnvmcap\" : 1024209543168,\n  \"unvmcap\" : 0,\n  \"rpmbs\" : 2147418119,\n  \"edstt\" : 30,\n  \"dsto\" : 1,\n  \"fwug\" : 1,\n  \"kas\" : 0,\n  \"hctma\" : 1,\n  \"mntmt\" : 343,\n  \"mxtmt\" : 358,\n  \"sanicap\" : 1073741826,\n  \"hmminds\" : 256,\n  \"hmmaxd\" : 32,\n  \"nsetidmax\" : 0,\n  \"anatt\" : 0,\n  \"anacap\" : 0,\n  \"anagrpmax\" : 0,\n  \"nanagrpid\" : 0,\n  \"domainid\" : 0,\n  \"megcap\" : 0,\n  \"sqes\" : 102,\n  \"cqes\" : 68,\n  \"maxcmd\" : 0,\n  \"nn\" : 1,\n  \"oncs\" : 95,\n  \"fuses\" : 0,\n  \"fna\" : 3,\n  \"vwc\" : 5,\n  \"awun\" : 0,\n  \"awupf\" : 0,\n  \"icsvscc\" : 0,\n  \"nwpc\" : 0,\n  \"acwu\" : 0,\n  \"ocfs\" : 0,\n  \"sgls\" : 0,\n  \"maxdna\" : 0,\n  \"maxcna\" : 0,\n  \"subnqn\" : \"nqn.2014-08.com.00000:nvme:QHD292R001169P3300\",\n  \"ioccsz\" : 0,\n  \"iorcsz\" : 0,\n  \"icdoff\" : 0,\n  \"fcatt\" : 0,\n  \"msdbd\" : 0,\n  \"ofcs\" : 0,\n  \"psds\" : [\n    {\n      \"max_power\" : 850,\n      \"flags\" : 0,\n      \"entry_lat\" : 0,\n      \"exit_lat\" : 0,\n      \"read_tput\" : 0,\n      \"read_lat\" : 0,\n      \"write_tput\" : 0,\n      \"write_lat\" : 0,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 650,\n      \"flags\" : 0,\n      \"entry_lat\" : 0,\n      \"exit_lat\" : 0,\n      \"read_tput\" : 1,\n      \"read_lat\" : 1,\n      \"write_tput\" : 1,\n      \"write_lat\" : 1,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 450,\n      \"flags\" : 0,\n      \"entry_lat\" : 0,\n      \"exit_lat\" : 0,\n      \"read_tput\" : 2,\n      \"read_lat\" : 2,\n      \"write_tput\" : 2,\n      \"write_lat\" : 2,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 500,\n      \"flags\" : 3,\n      \"entry_lat\" : 5000,\n      \"exit_lat\" : 5000,\n      \"read_tput\" : 3,\n      \"read_lat\" : 3,\n      \"write_tput\" : 3,\n      \"write_lat\" : 3,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 50,\n      \"flags\" : 3,\n      \"entry_lat\" : 5000,\n      \"exit_lat\" : 13000,\n      \"read_tput\" : 4,\n      \"read_lat\" : 4,\n      \"write_tput\" : 4,\n      \"write_lat\" : 4,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    }\n  ]\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "id-ns",
+      "/dev/nvme1n1",
+      "-o",
+      "json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.002,
+    "stdout_preview": "{\n  \"nsze\" : 2000409264,\n  \"ncap\" : 2000409264,\n  \"nuse\" : 2000409264,\n  \"nsfeat\" : 0,\n  \"nlbaf\" : 0,\n  \"flbas\" : 0,\n  \"mc\" : 0,\n  \"dpc\" : 0,\n  \"dps\" : 0,\n  \"nmic\" : 0,\n  \"rescap\" : 0,\n  \"fpi\" : 0,\n  \"nawun\" : 0,\n  \"nawupf\" : 0,\n  \"nacwu\" : 0,\n  \"nabsn\" : 0,\n  \"nabo\" : 0,\n  \"nabspf\" : 0,\n  \"noiob\" : 0,\n  \"nvmcap\" : 1024209543168,\n  \"nsattr\" : 0,\n  \"nvmsetid\" : 0,\n  \"mssrl\" : 0,\n  \"mcl\" : 0,\n  \"msrc\" : 0,\n  \"anagrpid\" : 0,\n  \"endgid\" : 0,\n  \"eui64\" : \"caf25b032b0000a9\",\n  \"nguid\" : \"0000000625081292caf25b038a000239\",\n  \"lbafs\" : [\n    {\n      \"ms\" : 0,\n      \"ds\" : 9,\n      \"rp\" : 0\n    }\n  ]\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "smart-log",
+      "/dev/nvme1n1",
+      "-o",
+      "json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.037,
+    "stdout_preview": "{\n  \"critical_warning\" : 0,\n  \"temperature\" : 312,\n  \"avail_spare\" : 100,\n  \"spare_thresh\" : 10,\n  \"percent_used\" : 0,\n  \"endurance_grp_critical_warning_summary\" : 0,\n  \"data_units_read\" : 282263,\n  \"data_units_written\" : 517944,\n  \"host_read_commands\" : 13206613,\n  \"host_write_commands\" : 42445318,\n  \"controller_busy_time\" : 30,\n  \"power_cycles\" : 26,\n  \"power_on_hours\" : 28,\n  \"unsafe_shutdowns\" : 12,\n  \"media_errors\" : 0,\n  \"num_err_log_entries\" : 0,\n  \"warning_temp_time\" : 0,\n  \"critical_comp_time\" : 0,\n  \"temperature_sensor_1\" : 311,\n  \"temperature_sensor_2\" : 312,\n  \"thm_temp1_trans_count\" : 0,\n  \"thm_temp2_trans_count\" : 0,\n  \"thm_temp1_total_time\" : 0,\n  \"thm_temp2_total_time\" : 0\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "smartctl",
+      "-a",
+      "-j",
+      "/dev/nvme1n1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.052,
+    "stdout_preview": "{\n  \"json_format_version\": [\n    1,\n    0\n  ],\n  \"smartctl\": {\n    \"version\": [\n      7,\n      2\n    ],\n    \"svn_revision\": \"5155\",\n    \"platform_info\": \"x86_64-linux-6.8.0-101-generic\",\n    \"build_info\": \"(local build)\",\n    \"argv\": [\n      \"smartctl\",\n      \"-a\",\n      \"-j\",\n      \"/dev/nvme1n1\"\n    ],\n    \"exit_status\": 0\n  },\n  \"device\": {\n    \"name\": \"/dev/nvme1n1\",\n    \"info_name\": \"/dev/nvme1n1\",\n    \"type\": \"nvme\",\n    \"protocol\": \"NVMe\"\n  },\n  \"model_name\": \"Lexar SSD ARES PRO 1TB\",\n  \"serial_number\": \"QHD292R001169P3300\",\n  \"firmware_version\": \"641225\",\n  \"nvme_pci_vendor\": {\n    \"id\": 7575,\n    \"subsystem_id\": 7575\n  },\n  \"nvme_ieee_oui_identifier\": 13300315,\n  \"nvme_total_capacity\": 1024209543168,\n  \"nvme_unallocated_capacity\": 0,\n  \"nvme_controller_id\": 0,\n  \"nvme_version\": {\n    \"string\": \"2.0\",\n    \"value\": 131072\n  },\n  \"nvme_number_of_namespaces\": 1,\n  \"nvme_namespaces\": [\n    {\n      \"id\": 1,\n      \"size\": {\n        \"blocks\": 2000409264,\n        \"bytes\": 1024209543168\n      },\n      \"capacity\": {\n        \"blocks\": 2000409264,\n        \"bytes\": 1024209543168\n      },\n      \"utilization\": {\n        \"blocks\": 2000409264,\n        \"bytes\": 1024209543168\n      },\n      \"formatted_lba_size\": 512,\n      \"eui64\": {\n        \"oui\": 13300315,\n        \"ext_id\": 13606322345\n      }\n    }\n  ],\n  \"user_capacity\": {\n    \"blocks\": 2000409264,\n    \"bytes\": 1024209543168\n  },\n  \"logical_block_size\": 512,\n  \"local_time\": {\n    \"time_t\": 1773485017,\n    \"asctime\": \"Sat Mar 14 18:43:37 2026 CST\"\n  },\n  \"smart_status\": {\n    \"passed\": true,\n    \"nvme\": {\n      \"value\": 0\n    }\n  },\n  \"nvme_smart_health_information_log\": {\n    \"critical_warning\": 0,\n    \"temperature\": 39,\n    \"available_spare\": 100,\n    \"available_spare_threshold\": 10,\n    \"percentage_used\": 0,\n    \"data_units_read\": 282263,\n    \"data_units_written\": 517944,\n    \"host_reads\": 13206613,\n    \"host_writes\": 42445318,\n    \"controller_busy_time\": 30,\n    \"power_cycles\": 26,\n    \"power_on_hours\": 28,\n    \"unsafe_shutdowns\": 12,\n    \"media_errors\": 0,\n    \"num_err_log_entries\": 0,\n    \"warning_temp_time\": 0,\n    \"critical_comp_time\": 0,\n    \"temperature_sensors\": [\n      38,\n      39\n    ]\n  },\n  \"temperature\": {\n    \"current\": 39\n  },\n  \"power_cycle_count\": 26,\n  \"power_on_time\": {\n    \"hours\": 28\n  }\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "flush",
+      "/dev/nvme1n1",
+      "-n",
+      "1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.002,
+    "stdout_preview": "NVMe Flush: success\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "blkdiscard",
+      "-o",
+      "1610612736",
+      "-l",
+      "16777216",
+      "/dev/nvme1n1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.009,
+    "stdout_preview": "",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "fio",
+      "--name=seq_write_128k",
+      "--filename=/dev/nvme1n1",
+      "--rw=write",
+      "--bs=128k",
+      "--iodepth=32",
+      "--numjobs=1",
+      "--ioengine=libaio",
+      "--direct=1",
+      "--thread=1",
+      "--group_reporting=1",
+      "--size=536870912",
+      "--offset=2147483648",
+      "--output-format=json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.691,
+    "stdout_preview": "{\n  \"fio version\" : \"fio-3.28\",\n  \"timestamp\" : 1773485018,\n  \"timestamp_ms\" : 1773485018555,\n  \"time\" : \"Sat Mar 14 18:43:38 2026\",\n  \"jobs\" : [\n    {\n      \"jobname\" : \"seq_write_128k\",\n      \"groupid\" : 0,\n      \"error\" : 0,\n      \"eta\" : 2147483647,\n      \"elapsed\" : 1,\n      \"job options\" : {\n        \"name\" : \"seq_write_128k\",\n        \"filename\" : \"/dev/nvme1n1\",\n        \"rw\" : \"write\",\n        \"bs\" : \"128k\",\n        \"iodepth\" : \"32\",\n        \"numjobs\" : \"1\",\n        \"ioengine\" : \"libaio\",\n        \"direct\" : \"1\",\n        \"thread\" : \"1\",\n        \"group_reporting\" : \"1\",\n        \"size\" : \"536870912\",\n        \"offset\" : \"2147483648\"\n      },\n      \"read\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"write\" : {\n        \"io_bytes\" : 536870912,\n        \"io_kbytes\" : 524288,\n        \"bw_bytes\" : 1335499781,\n        \"bw\" : 1304199,\n        \"iops\" : 10189.054726,\n        \"runtime\" : 402,\n        \"total_ios\" : 4096,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 7531,\n          \"max\" : 80085,\n          \"mean\" : 13495.581299,\n          \"stddev\" : 5854.876294,\n          \"N\" : 4096\n        },\n        \"clat_ns\" : {\n          \"min\" : 826731,\n          \"max\" : 6473201,\n          \"mean\" : 3115825.297607,\n          \"stddev\" : 570105.774389,\n          \"N\" : 4096,\n          \"percentile\" : {\n            \"1.000000\" : 1204224,\n            \"5.000000\" : 2342912,\n            \"10.000000\" : 2375680,\n            \"20.000000\" : 2801664,\n            \"30.000000\" : 2965504,\n            \"40.000000\" : 3031040,\n            \"50.000000\" : 3096576,\n            \"60.000000\" : 3194880,\n            \"70.000000\" : 3260416,\n            \"80.000000\" : 3358720,\n            \"90.000000\" : 3883008,\n            \"95.000000\" : 4227072,\n            \"99.000000\" : 4620288,\n            \"99.500000\" : 4751360,\n            \"99.900000\" : 5996544,\n            \"99.950000\" : 6389760,\n            \"99.990000\" : 6455296\n          }\n        },\n        \"lat_ns\" : {\n          \"min\" : 866492,\n          \"max\" : 6484818,\n          \"mean\" : 3129384.964355,\n          \"stddev\" : 568909.525660,\n          \"N\" : 4096\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"trim\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mea",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "fio",
+      "--name=seq_read_128k",
+      "--filename=/dev/nvme1n1",
+      "--rw=read",
+      "--bs=128k",
+      "--iodepth=32",
+      "--numjobs=1",
+      "--ioengine=libaio",
+      "--direct=1",
+      "--thread=1",
+      "--group_reporting=1",
+      "--size=536870912",
+      "--offset=3221225472",
+      "--output-format=json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.484,
+    "stdout_preview": "{\n  \"fio version\" : \"fio-3.28\",\n  \"timestamp\" : 1773485019,\n  \"timestamp_ms\" : 1773485019039,\n  \"time\" : \"Sat Mar 14 18:43:39 2026\",\n  \"jobs\" : [\n    {\n      \"jobname\" : \"seq_read_128k\",\n      \"groupid\" : 0,\n      \"error\" : 0,\n      \"eta\" : 2147483647,\n      \"elapsed\" : 1,\n      \"job options\" : {\n        \"name\" : \"seq_read_128k\",\n        \"filename\" : \"/dev/nvme1n1\",\n        \"rw\" : \"read\",\n        \"bs\" : \"128k\",\n        \"iodepth\" : \"32\",\n        \"numjobs\" : \"1\",\n        \"ioengine\" : \"libaio\",\n        \"direct\" : \"1\",\n        \"thread\" : \"1\",\n        \"group_reporting\" : \"1\",\n        \"size\" : \"536870912\",\n        \"offset\" : \"3221225472\"\n      },\n      \"read\" : {\n        \"io_bytes\" : 536870912,\n        \"io_kbytes\" : 524288,\n        \"bw_bytes\" : 2810842471,\n        \"bw\" : 2744963,\n        \"iops\" : 21445.026178,\n        \"runtime\" : 191,\n        \"total_ios\" : 4096,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 4305,\n          \"max\" : 53689,\n          \"mean\" : 6215.053711,\n          \"stddev\" : 3506.288924,\n          \"N\" : 4096\n        },\n        \"clat_ns\" : {\n          \"min\" : 575624,\n          \"max\" : 9711526,\n          \"mean\" : 1474202.933350,\n          \"stddev\" : 826785.614699,\n          \"N\" : 4096,\n          \"percentile\" : {\n            \"1.000000\" : 798720,\n            \"5.000000\" : 946176,\n            \"10.000000\" : 1028096,\n            \"20.000000\" : 1204224,\n            \"30.000000\" : 1286144,\n            \"40.000000\" : 1318912,\n            \"50.000000\" : 1335296,\n            \"60.000000\" : 1368064,\n            \"70.000000\" : 1417216,\n            \"80.000000\" : 1499136,\n            \"90.000000\" : 1630208,\n            \"95.000000\" : 1875968,\n            \"99.000000\" : 5603328,\n            \"99.500000\" : 6455296,\n            \"99.900000\" : 9109504,\n            \"99.950000\" : 9502720,\n            \"99.990000\" : 9764864\n          }\n        },\n        \"lat_ns\" : {\n          \"min\" : 581564,\n          \"max\" : 9739824,\n          \"mean\" : 1480475.897461,\n          \"stddev\" : 828426.183496,\n          \"N\" : 4096\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"write\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"trim\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "fio",
+      "--name=rand_write_4k",
+      "--filename=/dev/nvme1n1",
+      "--rw=randwrite",
+      "--bs=4k",
+      "--iodepth=32",
+      "--numjobs=1",
+      "--ioengine=libaio",
+      "--direct=1",
+      "--thread=1",
+      "--group_reporting=1",
+      "--size=268435456",
+      "--offset=4294967296",
+      "--output-format=json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.545,
+    "stdout_preview": "{\n  \"fio version\" : \"fio-3.28\",\n  \"timestamp\" : 1773485019,\n  \"timestamp_ms\" : 1773485019585,\n  \"time\" : \"Sat Mar 14 18:43:39 2026\",\n  \"jobs\" : [\n    {\n      \"jobname\" : \"rand_write_4k\",\n      \"groupid\" : 0,\n      \"error\" : 0,\n      \"eta\" : 2147483647,\n      \"elapsed\" : 1,\n      \"job options\" : {\n        \"name\" : \"rand_write_4k\",\n        \"filename\" : \"/dev/nvme1n1\",\n        \"rw\" : \"randwrite\",\n        \"bs\" : \"4k\",\n        \"iodepth\" : \"32\",\n        \"numjobs\" : \"1\",\n        \"ioengine\" : \"libaio\",\n        \"direct\" : \"1\",\n        \"thread\" : \"1\",\n        \"group_reporting\" : \"1\",\n        \"size\" : \"268435456\",\n        \"offset\" : \"4294967296\"\n      },\n      \"read\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"write\" : {\n        \"io_bytes\" : 268435456,\n        \"io_kbytes\" : 262144,\n        \"bw_bytes\" : 1061009707,\n        \"bw\" : 1036142,\n        \"iops\" : 259035.573123,\n        \"runtime\" : 253,\n        \"total_ios\" : 65536,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 1176,\n          \"max\" : 73331,\n          \"mean\" : 2508.440186,\n          \"stddev\" : 2107.838125,\n          \"N\" : 65536\n        },\n        \"clat_ns\" : {\n          \"min\" : 14169,\n          \"max\" : 1208219,\n          \"mean\" : 120469.036240,\n          \"stddev\" : 78313.191026,\n          \"N\" : 65536,\n          \"percentile\" : {\n            \"1.000000\" : 64256,\n            \"5.000000\" : 72192,\n            \"10.000000\" : 77312,\n            \"20.000000\" : 82432,\n            \"30.000000\" : 85504,\n            \"40.000000\" : 88576,\n            \"50.000000\" : 92672,\n            \"60.000000\" : 99840,\n            \"70.000000\" : 125440,\n            \"80.000000\" : 142336,\n            \"90.000000\" : 164864,\n            \"95.000000\" : 305152,\n            \"99.000000\" : 448512,\n            \"99.500000\" : 569344,\n            \"99.900000\" : 888832,\n            \"99.950000\" : 962560,\n            \"99.990000\" : 1187840\n          }\n        },\n        \"lat_ns\" : {\n          \"min\" : 15604,\n          \"max\" : 1209865,\n          \"mean\" : 123061.343414,\n          \"stddev\" : 78820.901590,\n          \"N\" : 65536\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"trim\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "fio",
+      "--name=rand_read_4k",
+      "--filename=/dev/nvme1n1",
+      "--rw=randread",
+      "--bs=4k",
+      "--iodepth=32",
+      "--numjobs=1",
+      "--ioengine=libaio",
+      "--direct=1",
+      "--thread=1",
+      "--group_reporting=1",
+      "--size=268435456",
+      "--offset=4831838208",
+      "--output-format=json"
+    ],
+    "returncode": 0,
+    "duration_sec": 1.938,
+    "stdout_preview": "{\n  \"fio version\" : \"fio-3.28\",\n  \"timestamp\" : 1773485021,\n  \"timestamp_ms\" : 1773485021522,\n  \"time\" : \"Sat Mar 14 18:43:41 2026\",\n  \"jobs\" : [\n    {\n      \"jobname\" : \"rand_read_4k\",\n      \"groupid\" : 0,\n      \"error\" : 0,\n      \"eta\" : 2147483647,\n      \"elapsed\" : 2,\n      \"job options\" : {\n        \"name\" : \"rand_read_4k\",\n        \"filename\" : \"/dev/nvme1n1\",\n        \"rw\" : \"randread\",\n        \"bs\" : \"4k\",\n        \"iodepth\" : \"32\",\n        \"numjobs\" : \"1\",\n        \"ioengine\" : \"libaio\",\n        \"direct\" : \"1\",\n        \"thread\" : \"1\",\n        \"group_reporting\" : \"1\",\n        \"size\" : \"268435456\",\n        \"offset\" : \"4831838208\"\n      },\n      \"read\" : {\n        \"io_bytes\" : 268435456,\n        \"io_kbytes\" : 262144,\n        \"bw_bytes\" : 161903170,\n        \"bw\" : 158108,\n        \"iops\" : 39527.141134,\n        \"runtime\" : 1658,\n        \"total_ios\" : 65536,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 1199,\n          \"max\" : 55929,\n          \"mean\" : 1713.533066,\n          \"stddev\" : 1323.551088,\n          \"N\" : 65536\n        },\n        \"clat_ns\" : {\n          \"min\" : 23316,\n          \"max\" : 23453515,\n          \"mean\" : 807081.042145,\n          \"stddev\" : 1318042.644786,\n          \"N\" : 65536,\n          \"percentile\" : {\n            \"1.000000\" : 66048,\n            \"5.000000\" : 185344,\n            \"10.000000\" : 280576,\n            \"20.000000\" : 362496,\n            \"30.000000\" : 428032,\n            \"40.000000\" : 528384,\n            \"50.000000\" : 626688,\n            \"60.000000\" : 675840,\n            \"70.000000\" : 733184,\n            \"80.000000\" : 888832,\n            \"90.000000\" : 1011712,\n            \"95.000000\" : 1204224,\n            \"99.000000\" : 8454144,\n            \"99.500000\" : 10813440,\n            \"99.900000\" : 14352384,\n            \"99.950000\" : 15400960,\n            \"99.990000\" : 18743296\n          }\n        },\n        \"lat_ns\" : {\n          \"min\" : 24870,\n          \"max\" : 23455616,\n          \"mean\" : 808850.593887,\n          \"stddev\" : 1318048.983967,\n          \"N\" : 65536\n        },\n        \"bw_min\" : 149824,\n        \"bw_max\" : 166448,\n        \"bw_agg\" : 99.851643,\n        \"bw_mean\" : 157874.666667,\n        \"bw_dev\" : 8324.315547,\n        \"bw_samples\" : 3,\n        \"iops_min\" : 37456,\n        \"iops_max\" : 41612,\n        \"iops_mean\" : 39468.666667,\n        \"iops_stddev\" : 2081.078887,\n        \"iops_samples\" : 3\n      },\n      \"write\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"bw_min\" : 0,\n        \"bw_max\" : 0,\n        \"bw_agg\" : 0.000000,\n        \"bw_mean\" : 0.000000,\n        \"bw_dev\" : 0.000000,\n        \"bw_samples\" : 0,\n        \"iops_min\" : 0,\n        \"iops_max\" : 0,\n        \"iops_mean\" : 0.000000,\n        \"iops_stddev\" : 0.000000,\n        \"iops_samples\" : 0\n      },\n      \"trim\" : {\n        \"io_bytes\" : 0,\n        \"io_kbytes\" : 0,\n        \"bw_bytes\" : 0,\n        \"bw\" : 0,\n        \"iops\" : 0.000000,\n        \"runtime\" : 0,\n        \"total_ios\" : 0,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"clat_ns\" : {\n          \"min\" : 0,\n          \"max\" : 0,\n          \"mean\" : 0.000000,\n          \"stddev\" : 0.000000,\n          \"N\" : 0\n        },\n        \"lat_ns\" : {\n          \"min\" : 0,\n         ",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "fio",
+      "--name=randrw_4k_70read",
+      "--filename=/dev/nvme1n1",
+      "--rw=randrw",
+      "--bs=4k",
+      "--iodepth=32",
+      "--numjobs=1",
+      "--ioengine=libaio",
+      "--direct=1",
+      "--thread=1",
+      "--group_reporting=1",
+      "--size=268435456",
+      "--offset=5368709120",
+      "--output-format=json",
+      "--rwmixread=70"
+    ],
+    "returncode": 0,
+    "duration_sec": 1.484,
+    "stdout_preview": "{\n  \"fio version\" : \"fio-3.28\",\n  \"timestamp\" : 1773485023,\n  \"timestamp_ms\" : 1773485023006,\n  \"time\" : \"Sat Mar 14 18:43:43 2026\",\n  \"jobs\" : [\n    {\n      \"jobname\" : \"randrw_4k_70read\",\n      \"groupid\" : 0,\n      \"error\" : 0,\n      \"eta\" : 2147483647,\n      \"elapsed\" : 2,\n      \"job options\" : {\n        \"name\" : \"randrw_4k_70read\",\n        \"filename\" : \"/dev/nvme1n1\",\n        \"rw\" : \"randrw\",\n        \"bs\" : \"4k\",\n        \"iodepth\" : \"32\",\n        \"numjobs\" : \"1\",\n        \"ioengine\" : \"libaio\",\n        \"direct\" : \"1\",\n        \"thread\" : \"1\",\n        \"group_reporting\" : \"1\",\n        \"size\" : \"268435456\",\n        \"offset\" : \"5368709120\",\n        \"rwmixread\" : \"70\"\n      },\n      \"read\" : {\n        \"io_bytes\" : 188047360,\n        \"io_kbytes\" : 183640,\n        \"bw_bytes\" : 158689755,\n        \"bw\" : 154970,\n        \"iops\" : 38742.616034,\n        \"runtime\" : 1185,\n        \"total_ios\" : 45910,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 1195,\n          \"max\" : 47223,\n          \"mean\" : 1760.932172,\n          \"stddev\" : 1344.347148,\n          \"N\" : 45910\n        },\n        \"clat_ns\" : {\n          \"min\" : 17133,\n          \"max\" : 24308833,\n          \"mean\" : 815792.921695,\n          \"stddev\" : 1289744.669867,\n          \"N\" : 45910,\n          \"percentile\" : {\n            \"1.000000\" : 67072,\n            \"5.000000\" : 179200,\n            \"10.000000\" : 292864,\n            \"20.000000\" : 407552,\n            \"30.000000\" : 473088,\n            \"40.000000\" : 536576,\n            \"50.000000\" : 610304,\n            \"60.000000\" : 684032,\n            \"70.000000\" : 765952,\n            \"80.000000\" : 856064,\n            \"90.000000\" : 995328,\n            \"95.000000\" : 1236992,\n            \"99.000000\" : 8585216,\n            \"99.500000\" : 10551296,\n            \"99.900000\" : 13565952,\n            \"99.950000\" : 14876672,\n            \"99.990000\" : 21889024\n          }\n        },\n        \"lat_ns\" : {\n          \"min\" : 18561,\n          \"max\" : 24310216,\n          \"mean\" : 817614.870616,\n          \"stddev\" : 1289751.645562,\n          \"N\" : 45910\n        },\n        \"bw_min\" : 152608,\n        \"bw_max\" : 154248,\n        \"bw_agg\" : 99.004672,\n        \"bw_mean\" : 153428.000000,\n        \"bw_dev\" : 1159.655121,\n        \"bw_samples\" : 2,\n        \"iops_min\" : 38152,\n        \"iops_max\" : 38562,\n        \"iops_mean\" : 38357.000000,\n        \"iops_stddev\" : 289.913780,\n        \"iops_samples\" : 2\n      },\n      \"write\" : {\n        \"io_bytes\" : 80388096,\n        \"io_kbytes\" : 78504,\n        \"bw_bytes\" : 67838055,\n        \"bw\" : 66248,\n        \"iops\" : 16562.025316,\n        \"runtime\" : 1185,\n        \"total_ios\" : 19626,\n        \"short_ios\" : 0,\n        \"drop_ios\" : 0,\n        \"slat_ns\" : {\n          \"min\" : 1186,\n          \"max\" : 32894,\n          \"mean\" : 1896.348874,\n          \"stddev\" : 1295.907174,\n          \"N\" : 19626\n        },\n        \"clat_ns\" : {\n          \"min\" : 6029,\n          \"max\" : 235676,\n          \"mean\" : 15414.238052,\n          \"stddev\" : 7729.254460,\n          \"N\" : 19626,\n          \"percentile\" : {\n            \"1.000000\" : 10304,\n            \"5.000000\" : 10944,\n            \"10.000000\" : 11072,\n            \"20.000000\" : 11456,\n            \"30.000000\" : 11712,\n            \"40.000000\" : 12352,\n            \"50.000000\" : 13248,\n            \"60.000000\" : 14528,\n            \"70.000000\" : 15936,\n            \"80.000000\" : 18048,\n            \"90.000000\" : 21888,\n            \"95.000000\" : 25728,\n            \"99.000000\" : 37632,\n            \"99.500000\" : 48384,\n            \"99.900000\" : 93696,\n            \"99.950000\" : 187392,\n            \"99.990000\" : 226304\n          }\n        },\n        \"lat_ns\" : {\n          \"min\" : 11105,\n          \"max\" : 244786,\n          \"mean\" : 17371.298278,\n          \"stddev\" : 8142.187266,\n          \"N\" : 19626\n        },\n        \"bw_min\" : 64920,\n        \"bw_max\" : 66352,\n        \"bw_agg\" : 99.076048,\n        \"bw_mean\" : 65636.000000,\n        \"bw_dev\" : 1012.576911,\n        \"bw_samples\" : 2,\n  ",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool",
+      "/dev/nvme1",
+      "id-ctrl"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.001,
+    "stdout_preview": "Identify Controller\n===================\nVID: 0x1d97\nSSVID: 0x1d97\nSerial Number: QHD292R001169P3300\nModel Number: Lexar SSD ARES PRO 1TB\nFirmware Revision: 641225\nController ID: 0\nVersion (raw): 0x00020000\nIEEE OUI Identifier: 5b-f2-ca\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool",
+      "/dev/nvme1",
+      "id-ns",
+      "1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.001,
+    "stdout_preview": "Identify Namespace\n==================\nNamespace ID: 1\nNSZE: 2000409264\nNCAP: 2000409264\nNUSE: 2000409264\nNSFEAT: 0x00\nNLBAF: 0\nFLBAS: 0x00\nSelected LBA Format Index: 0\nSelected LBA Data Size: 512 bytes\nSelected Metadata Size: 0 bytes\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool",
+      "/dev/nvme1",
+      "smart-log"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.049,
+    "stdout_preview": "SMART / Health Log\n==================\nCritical Warning: 0x00\nTemperature: 39 C (312 K)\nAvailable Spare: 100 %\nAvailable Spare Threshold: 10 %\nPercentage Used: 0 %\nData Units Read (low64): 284228\nData Units Written (low64): 519797\nHost Read Commands (low64): 13322778\nHost Write Commands (low64): 42535056\nMedia Errors (low64): 0\nNumber of Error Log Entries (low64): 0\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool",
+      "/dev/nvme1",
+      "error-log",
+      "1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.002,
+    "stdout_preview": "Error Log\n=========\nEntry 0\n  Error Count: 0\n  SQID: 0\n  CMDID: 0\n  Status Field: 0x0000\n  LBA: 0\n  Namespace ID: 0\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_odirect_verify",
+      "/dev/nvme1n1",
+      "5632",
+      "8",
+      "4",
+      "63001"
+    ],
+    "returncode": 0,
+    "duration_sec": 2.066,
+    "stdout_preview": "{\n  \"device\": \"/dev/nvme1n1\",\n  \"offset_mb\": 5632,\n  \"length_mb\": 8,\n  \"block_size_kb\": 4,\n  \"logical_block_size\": 512,\n  \"alignment_bytes\": 4096,\n  \"seed\": 63001,\n  \"expected_fnv1a\": \"0xa6a13314189b7ce1\",\n  \"actual_fnv1a\": \"0xa6a13314189b7ce1\",\n  \"mismatch_offset\": null,\n  \"match\": true\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "lsblk",
+      "-J",
+      "-O",
+      "/dev/nvme1n1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.002,
+    "stdout_preview": "{\n   \"blockdevices\": [\n      {\n         \"name\": \"nvme1n1\",\n         \"kname\": \"nvme1n1\",\n         \"path\": \"/dev/nvme1n1\",\n         \"maj:min\": \"259:10\",\n         \"fsavail\": null,\n         \"fssize\": null,\n         \"fstype\": null,\n         \"fsused\": null,\n         \"fsuse%\": null,\n         \"fsroots\": [\n             null\n         ],\n         \"fsver\": null,\n         \"mountpoint\": null,\n         \"mountpoints\": [\n             null\n         ],\n         \"label\": null,\n         \"uuid\": null,\n         \"ptuuid\": null,\n         \"pttype\": null,\n         \"parttype\": null,\n         \"parttypename\": null,\n         \"partlabel\": null,\n         \"partuuid\": null,\n         \"partflags\": null,\n         \"ra\": 128,\n         \"ro\": false,\n         \"rm\": false,\n         \"hotplug\": false,\n         \"model\": \"Lexar SSD ARES PRO 1TB\",\n         \"serial\": \"QHD292R001169P3300\",\n         \"size\": \"953.9G\",\n         \"state\": \"live\",\n         \"owner\": \"root\",\n         \"group\": \"disk\",\n         \"mode\": \"brw-rw----\",\n         \"alignment\": 0,\n         \"min-io\": 512,\n         \"opt-io\": 0,\n         \"phy-sec\": 512,\n         \"log-sec\": 512,\n         \"rota\": false,\n         \"sched\": \"none\",\n         \"rq-size\": 1023,\n         \"type\": \"disk\",\n         \"disc-aln\": 0,\n         \"disc-gran\": \"512B\",\n         \"disc-max\": \"2T\",\n         \"disc-zero\": false,\n         \"wsame\": \"0B\",\n         \"wwn\": \"eui.0000000625081292caf25b038a000239\",\n         \"rand\": false,\n         \"pkname\": null,\n         \"hctl\": null,\n         \"tran\": \"nvme\",\n         \"subsystems\": \"block:nvme:pci\",\n         \"rev\": null,\n         \"vendor\": null,\n         \"zoned\": \"none\",\n         \"dax\": false\n      }\n   ]\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "id-ctrl",
+      "/dev/nvme1",
+      "-o",
+      "json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.001,
+    "stdout_preview": "{\n  \"vid\" : 7575,\n  \"ssvid\" : 7575,\n  \"sn\" : \"QHD292R001169P3300\",\n  \"mn\" : \"Lexar SSD ARES PRO 1TB\",\n  \"fr\" : \"641225  \",\n  \"rab\" : 0,\n  \"ieee\" : 13300315,\n  \"cmic\" : 0,\n  \"mdts\" : 7,\n  \"cntlid\" : 0,\n  \"ver\" : 131072,\n  \"rtd3r\" : 100000,\n  \"rtd3e\" : 2000000,\n  \"oaes\" : 512,\n  \"ctratt\" : 2,\n  \"rrls\" : 0,\n  \"fguid\" : \"00000000-0000-0000-0000-000000000000\",\n  \"crdt1\" : 0,\n  \"crdt2\" : 0,\n  \"crdt3\" : 0,\n  \"nvmsr\" : 0,\n  \"vwci\" : 0,\n  \"mec\" : 0,\n  \"oacs\" : 23,\n  \"acl\" : 2,\n  \"aerl\" : 3,\n  \"frmw\" : 22,\n  \"lpa\" : 22,\n  \"elpe\" : 63,\n  \"npss\" : 4,\n  \"avscc\" : 1,\n  \"apsta\" : 1,\n  \"wctemp\" : 363,\n  \"cctemp\" : 368,\n  \"mtfa\" : 200,\n  \"hmpre\" : 8192,\n  \"hmmin\" : 8192,\n  \"tnvmcap\" : 1024209543168,\n  \"unvmcap\" : 0,\n  \"rpmbs\" : 2147418119,\n  \"edstt\" : 30,\n  \"dsto\" : 1,\n  \"fwug\" : 1,\n  \"kas\" : 0,\n  \"hctma\" : 1,\n  \"mntmt\" : 343,\n  \"mxtmt\" : 358,\n  \"sanicap\" : 1073741826,\n  \"hmminds\" : 256,\n  \"hmmaxd\" : 32,\n  \"nsetidmax\" : 0,\n  \"anatt\" : 0,\n  \"anacap\" : 0,\n  \"anagrpmax\" : 0,\n  \"nanagrpid\" : 0,\n  \"domainid\" : 0,\n  \"megcap\" : 0,\n  \"sqes\" : 102,\n  \"cqes\" : 68,\n  \"maxcmd\" : 0,\n  \"nn\" : 1,\n  \"oncs\" : 95,\n  \"fuses\" : 0,\n  \"fna\" : 3,\n  \"vwc\" : 5,\n  \"awun\" : 0,\n  \"awupf\" : 0,\n  \"icsvscc\" : 0,\n  \"nwpc\" : 0,\n  \"acwu\" : 0,\n  \"ocfs\" : 0,\n  \"sgls\" : 0,\n  \"maxdna\" : 0,\n  \"maxcna\" : 0,\n  \"subnqn\" : \"nqn.2014-08.com.00000:nvme:QHD292R001169P3300\",\n  \"ioccsz\" : 0,\n  \"iorcsz\" : 0,\n  \"icdoff\" : 0,\n  \"fcatt\" : 0,\n  \"msdbd\" : 0,\n  \"ofcs\" : 0,\n  \"psds\" : [\n    {\n      \"max_power\" : 850,\n      \"flags\" : 0,\n      \"entry_lat\" : 0,\n      \"exit_lat\" : 0,\n      \"read_tput\" : 0,\n      \"read_lat\" : 0,\n      \"write_tput\" : 0,\n      \"write_lat\" : 0,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 650,\n      \"flags\" : 0,\n      \"entry_lat\" : 0,\n      \"exit_lat\" : 0,\n      \"read_tput\" : 1,\n      \"read_lat\" : 1,\n      \"write_tput\" : 1,\n      \"write_lat\" : 1,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 450,\n      \"flags\" : 0,\n      \"entry_lat\" : 0,\n      \"exit_lat\" : 0,\n      \"read_tput\" : 2,\n      \"read_lat\" : 2,\n      \"write_tput\" : 2,\n      \"write_lat\" : 2,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 500,\n      \"flags\" : 3,\n      \"entry_lat\" : 5000,\n      \"exit_lat\" : 5000,\n      \"read_tput\" : 3,\n      \"read_lat\" : 3,\n      \"write_tput\" : 3,\n      \"write_lat\" : 3,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    },\n    {\n      \"max_power\" : 50,\n      \"flags\" : 3,\n      \"entry_lat\" : 5000,\n      \"exit_lat\" : 13000,\n      \"read_tput\" : 4,\n      \"read_lat\" : 4,\n      \"write_tput\" : 4,\n      \"write_lat\" : 4,\n      \"idle_power\" : 0,\n      \"idle_scale\" : 0,\n      \"active_power\" : 0,\n      \"active_work_scale\" : 0\n    }\n  ]\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "id-ns",
+      "/dev/nvme1n1",
+      "-o",
+      "json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.001,
+    "stdout_preview": "{\n  \"nsze\" : 2000409264,\n  \"ncap\" : 2000409264,\n  \"nuse\" : 2000409264,\n  \"nsfeat\" : 0,\n  \"nlbaf\" : 0,\n  \"flbas\" : 0,\n  \"mc\" : 0,\n  \"dpc\" : 0,\n  \"dps\" : 0,\n  \"nmic\" : 0,\n  \"rescap\" : 0,\n  \"fpi\" : 0,\n  \"nawun\" : 0,\n  \"nawupf\" : 0,\n  \"nacwu\" : 0,\n  \"nabsn\" : 0,\n  \"nabo\" : 0,\n  \"nabspf\" : 0,\n  \"noiob\" : 0,\n  \"nvmcap\" : 1024209543168,\n  \"nsattr\" : 0,\n  \"nvmsetid\" : 0,\n  \"mssrl\" : 0,\n  \"mcl\" : 0,\n  \"msrc\" : 0,\n  \"anagrpid\" : 0,\n  \"endgid\" : 0,\n  \"eui64\" : \"caf25b032b0000a9\",\n  \"nguid\" : \"0000000625081292caf25b038a000239\",\n  \"lbafs\" : [\n    {\n      \"ms\" : 0,\n      \"ds\" : 9,\n      \"rp\" : 0\n    }\n  ]\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "nvme",
+      "smart-log",
+      "/dev/nvme1n1",
+      "-o",
+      "json"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.003,
+    "stdout_preview": "{\n  \"critical_warning\" : 0,\n  \"temperature\" : 312,\n  \"avail_spare\" : 100,\n  \"spare_thresh\" : 10,\n  \"percent_used\" : 0,\n  \"endurance_grp_critical_warning_summary\" : 0,\n  \"data_units_read\" : 284247,\n  \"data_units_written\" : 519813,\n  \"host_read_commands\" : 13324878,\n  \"host_write_commands\" : 42537104,\n  \"controller_busy_time\" : 30,\n  \"power_cycles\" : 26,\n  \"power_on_hours\" : 28,\n  \"unsafe_shutdowns\" : 12,\n  \"media_errors\" : 0,\n  \"num_err_log_entries\" : 0,\n  \"warning_temp_time\" : 0,\n  \"critical_comp_time\" : 0,\n  \"temperature_sensor_1\" : 319,\n  \"temperature_sensor_2\" : 312,\n  \"thm_temp1_trans_count\" : 0,\n  \"thm_temp2_trans_count\" : 0,\n  \"thm_temp1_total_time\" : 0,\n  \"thm_temp2_total_time\" : 0\n}\n",
+    "stderr_preview": ""
+  },
+  {
+    "cmd": [
+      "smartctl",
+      "-a",
+      "-j",
+      "/dev/nvme1n1"
+    ],
+    "returncode": 0,
+    "duration_sec": 0.015,
+    "stdout_preview": "{\n  \"json_format_version\": [\n    1,\n    0\n  ],\n  \"smartctl\": {\n    \"version\": [\n      7,\n      2\n    ],\n    \"svn_revision\": \"5155\",\n    \"platform_info\": \"x86_64-linux-6.8.0-101-generic\",\n    \"build_info\": \"(local build)\",\n    \"argv\": [\n      \"smartctl\",\n      \"-a\",\n      \"-j\",\n      \"/dev/nvme1n1\"\n    ],\n    \"exit_status\": 0\n  },\n  \"device\": {\n    \"name\": \"/dev/nvme1n1\",\n    \"info_name\": \"/dev/nvme1n1\",\n    \"type\": \"nvme\",\n    \"protocol\": \"NVMe\"\n  },\n  \"model_name\": \"Lexar SSD ARES PRO 1TB\",\n  \"serial_number\": \"QHD292R001169P3300\",\n  \"firmware_version\": \"641225\",\n  \"nvme_pci_vendor\": {\n    \"id\": 7575,\n    \"subsystem_id\": 7575\n  },\n  \"nvme_ieee_oui_identifier\": 13300315,\n  \"nvme_total_capacity\": 1024209543168,\n  \"nvme_unallocated_capacity\": 0,\n  \"nvme_controller_id\": 0,\n  \"nvme_version\": {\n    \"string\": \"2.0\",\n    \"value\": 131072\n  },\n  \"nvme_number_of_namespaces\": 1,\n  \"nvme_namespaces\": [\n    {\n      \"id\": 1,\n      \"size\": {\n        \"blocks\": 2000409264,\n        \"bytes\": 1024209543168\n      },\n      \"capacity\": {\n        \"blocks\": 2000409264,\n        \"bytes\": 1024209543168\n      },\n      \"utilization\": {\n        \"blocks\": 2000409264,\n        \"bytes\": 1024209543168\n      },\n      \"formatted_lba_size\": 512,\n      \"eui64\": {\n        \"oui\": 13300315,\n        \"ext_id\": 13606322345\n      }\n    }\n  ],\n  \"user_capacity\": {\n    \"blocks\": 2000409264,\n    \"bytes\": 1024209543168\n  },\n  \"logical_block_size\": 512,\n  \"local_time\": {\n    \"time_t\": 1773485025,\n    \"asctime\": \"Sat Mar 14 18:43:45 2026 CST\"\n  },\n  \"smart_status\": {\n    \"passed\": true,\n    \"nvme\": {\n      \"value\": 0\n    }\n  },\n  \"nvme_smart_health_information_log\": {\n    \"critical_warning\": 0,\n    \"temperature\": 39,\n    \"available_spare\": 100,\n    \"available_spare_threshold\": 10,\n    \"percentage_used\": 0,\n    \"data_units_read\": 284247,\n    \"data_units_written\": 519813,\n    \"host_reads\": 13324878,\n    \"host_writes\": 42537104,\n    \"controller_busy_time\": 30,\n    \"power_cycles\": 26,\n    \"power_on_hours\": 28,\n    \"unsafe_shutdowns\": 12,\n    \"media_errors\": 0,\n    \"num_err_log_entries\": 0,\n    \"warning_temp_time\": 0,\n    \"critical_comp_time\": 0,\n    \"temperature_sensors\": [\n      45,\n      39\n    ]\n  },\n  \"temperature\": {\n    \"current\": 39\n  },\n  \"power_cycle_count\": 26,\n  \"power_on_time\": {\n    \"hours\": 28\n  }\n}\n",
+    "stderr_preview": ""
+  }
+]

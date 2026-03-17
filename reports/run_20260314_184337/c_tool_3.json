@@ -1,0 +1,7 @@
+{
+  "cmd": "/home/djh/Projects/nvme_ssd_test_3/c_tools/nvme_admin_tool /dev/nvme1 smart-log",
+  "returncode": 0,
+  "duration_sec": 0.049,
+  "stdout": "SMART / Health Log\n==================\nCritical Warning: 0x00\nTemperature: 39 C (312 K)\nAvailable Spare: 100 %\nAvailable Spare Threshold: 10 %\nPercentage Used: 0 %\nData Units Read (low64): 284228\nData Units Written (low64): 519797\nHost Read Commands (low64): 13322778\nHost Write Commands (low64): 42535056\nMedia Errors (low64): 0\nNumber of Error Log Entries (low64): 0\n",
+  "stderr": ""
+}
