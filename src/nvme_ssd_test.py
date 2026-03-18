@@ -369,7 +369,7 @@ class NvmeSsdTestProject:
                 sha_written.update(payload)
                 bytes_written += current_size
 
-            os.fsync(fd)
+            os.fsync(fd)    # 强制缓存落盘，确保后续读到的数据是写入后的状态
 
             verify_rng = random.Random(seed)
             bytes_verified = 0
